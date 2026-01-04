@@ -6,53 +6,101 @@
     <title>Avoid Higueron</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes glare {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(400%) rotate(45deg); }
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         }
         
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(239, 68, 68, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.7), 0 0 60px rgba(239, 68, 68, 0.5); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .glare-effect {
-            position: relative;
-            overflow: hidden;
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
         }
         
-        .glare-effect::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 50%;
-            height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: glare 3s infinite;
-            animation-delay: 2s;
+        @keyframes pulse-modern {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 8px 30px rgba(239, 68, 68, 0.6);
+            }
         }
         
-        .glow-card {
-            animation: pulse-glow 3s ease-in-out infinite;
+        body {
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        .text-glow {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+        .react-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .divider-glow {
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.8), 0 0 20px rgba(251, 146, 60, 0.6);
+        .react-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+        
+        .modern-title {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .divider-modern {
+            background: linear-gradient(90deg, #ef4444, #f59e0b, #ef4444);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+            box-shadow: 0 2px 15px rgba(239, 68, 68, 0.5);
+        }
+        
+        .cta-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.1));
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse-modern 3s ease-in-out infinite;
+        }
+        
+        .cta-card:hover {
+            border-color: rgba(239, 68, 68, 0.6);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.2));
         }
         
         #languageSelector {
-            background-color: rgba(31, 41, 55, 0.9);
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.9), rgba(31, 41, 55, 0.9));
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        #languageSelector:hover {
+            background: linear-gradient(135deg, rgba(75, 85, 99, 0.95), rgba(55, 65, 81, 0.95));
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+        }
+        
+        #languageSelector:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
         }
         
         #languageSelector option {
             background-color: rgb(31, 41, 55);
             color: white;
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
         }
         
@@ -61,11 +109,16 @@
         }
         
         #languageSelector option:checked {
-            background-color: rgb(239, 68, 68);
+            background: linear-gradient(90deg, rgb(239, 68, 68), rgb(220, 38, 38));
+        }
+        
+        .description-text {
+            line-height: 1.7;
+            color: rgba(229, 231, 235, 0.95);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center px-4 py-8">
+<body class="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 min-h-screen flex items-center justify-center px-4 py-8">
     <div class="max-w-4xl w-full">
         <!-- Language Selector -->
         <div class="flex justify-end mb-4">
@@ -80,21 +133,22 @@
                 <option value="da">🇩🇰 Dansk</option>
                 <option value="sv">🇸🇪 Svenska</option>
                 <option value="no">🇳🇴 Norsk</option>
+                <option value="ru">🇷🇺 Русский</option>
                 <option value="fa">🇮🇷 فارسی</option>
             </select>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 border border-white/20 glare-effect">
+        <div class="react-card rounded-3xl p-8 md:p-12">
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight text-glow" data-i18n="title">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight modern-title" data-i18n="title">
                     Avoid Higueron
                 </h1>
-                <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto mb-8 divider-glow"></div>
-                <p class="text-xl md:text-2xl text-gray-200 leading-relaxed" data-i18n="description">
+                <div class="w-24 h-1.5 mx-auto mb-10 divider-modern rounded-full"></div>
+                <p class="text-xl md:text-2xl leading-relaxed description-text" data-i18n="description">
                     Welcome to Avoid Higueron — a platform dedicated to sharing and documenting real experiences and issues encountered when purchasing property in Higueron, Malaga. Empowering buyers with transparency and information.
                 </p>
-                <div class="mt-8">
-                    <p class="text-lg md:text-xl text-red-300 font-semibold bg-red-900/30 rounded-lg px-4 py-3 inline-block glow-card" data-i18n="callToAction">
+                <div class="mt-10">
+                    <p class="text-lg md:text-xl text-red-200 font-semibold rounded-xl px-6 py-4 inline-block cta-card" data-i18n="callToAction">
                         Constructor and Developer: Act now, address every concern, and prevent this website from expanding further
                     </p>
                 </div>
@@ -153,6 +207,11 @@
                 title: "Unngå Higueron",
                 description: "Velkommen til Unngå Higueron — en plattform dedikert til å dele og dokumentere virkelige erfaringer og problemer som oppstår ved kjøp av eiendom i Higueron, Malaga med byggmestre og utviklere.",
                 callToAction: "Byggmester og Utvikler: Handle nå, adresser alle bekymringer, som felles eller private elementer, og forhindre at dette nettstedet utvider seg ytterligere med ekte vitnesbyrd fra kjøpere"
+            },
+            ru: {
+                title: "Избегайте Хигерон",
+                description: "Добро пожаловать на платформу Избегайте Хигерон — платформу, посвящённую обмену и документированию реального опыта и проблем, возникающих при покупке недвижимости в Хигероне, Малага со строителями и застройщиками.",
+                callToAction: "Строитель и Застройщик: Действуйте сейчас, решите все проблемы, такие как общие или частные элементы, и предотвратите дальнейшее расширение этого сайта реальными отзывами покупателей"
             },
             fa: {
                 title: "اجتناب از هیگوئرون",
