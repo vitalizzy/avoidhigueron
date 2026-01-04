@@ -5,25 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avoid Higueron</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes glare {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(400%) rotate(45deg); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.7), 0 0 60px rgba(239, 68, 68, 0.5); }
+        }
+        
+        .glare-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glare-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: glare 3s infinite;
+            animation-delay: 2s;
+        }
+        
+        .glow-card {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .divider-glow {
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.8), 0 0 20px rgba(251, 146, 60, 0.6);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center px-4">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center px-4 py-8">
     <div class="max-w-4xl w-full">
-        <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 border border-white/20">
+        <!-- Language Selector -->
+        <div class="flex justify-end mb-4">
+            <select id="languageSelector" class="bg-white/10 backdrop-blur-lg text-white border border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer">
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="pt">🇵🇹 Português</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="fi">🇫🇮 Suomi</option>
+                <option value="da">🇩🇰 Dansk</option>
+                <option value="sv">🇸🇪 Svenska</option>
+                <option value="no">🇳🇴 Norsk</option>
+                <option value="fa">🇮🇷 فارسی</option>
+            </select>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 border border-white/20 glare-effect">
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight text-glow" data-i18n="title">
                     Avoid Higueron
                 </h1>
-                <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto mb-8"></div>
-                <p class="text-xl md:text-2xl text-gray-200 leading-relaxed">
+                <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto mb-8 divider-glow"></div>
+                <p class="text-xl md:text-2xl text-gray-200 leading-relaxed" data-i18n="description">
                     Welcome to Avoid Higueron — a platform dedicated to sharing and documenting real experiences and issues encountered when purchasing property in Higueron, Malaga. Empowering buyers with transparency and information.
                 </p>
                 <div class="mt-8">
-                    <p class="text-lg md:text-xl text-red-300 font-semibold bg-red-900/30 rounded-lg px-4 py-3 inline-block">
+                    <p class="text-lg md:text-xl text-red-300 font-semibold bg-red-900/30 rounded-lg px-4 py-3 inline-block glow-card" data-i18n="callToAction">
                         Constructor and Developer: Act now, address every concern, and prevent this website from expanding further
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Avoid Higueron",
+                description: "Welcome to Avoid Higueron — a platform dedicated to sharing and documenting real experiences and issues encountered when purchasing property in Higueron, Malaga with constructors and developers.",
+                callToAction: "Constructor and Developer: Act now, address every concern, such a common or private elements, and prevent this website from expanding further with real testimosnials from buyers"
+            },
+            es: {
+                title: "Evitar Higueron",
+                description: "Bienvenido a Evitar Higueron — una plataforma dedicada a compartir y documentar experiencias reales y problemas encontrados al comprar propiedades en Higueron, Málaga con constructores y promotores.",
+                callToAction: "Constructor y Promotor: Actúen ahora, aborden cada preocupación, como elementos comunes o privados, y eviten que este sitio web se expanda aún más con testimonios reales de compradores"
+            },
+            fr: {
+                title: "Éviter Higueron",
+                description: "Bienvenue sur Éviter Higueron — une plateforme dédiée au partage et à la documentation des expériences réelles et des problèmes rencontrés lors de l'achat d'une propriété à Higueron, Malaga avec des constructeurs et des promoteurs.",
+                callToAction: "Constructeur et Promoteur : Agissez maintenant, répondez à chaque préoccupation, tels que les éléments communs ou privés, et empêchez ce site web de se développer davantage avec de vrais témoignages d'acheteurs"
+            },
+            de: {
+                title: "Higueron Vermeiden",
+                description: "Willkommen bei Higueron Vermeiden — eine Plattform zur Weitergabe und Dokumentation echter Erfahrungen und Probleme beim Immobilienkauf in Higueron, Malaga mit Bauunternehmern und Entwicklern.",
+                callToAction: "Bauunternehmer und Entwickler: Handeln Sie jetzt, gehen Sie auf jede Sorge ein, wie Gemeinschafts- oder Privatbereiche, und verhindern Sie, dass diese Website mit echten Käuferberichten weiter wächst"
+            },
+            pt: {
+                title: "Evitar Higueron",
+                description: "Bem-vindo ao Evitar Higueron — uma plataforma dedicada a compartilhar e documentar experiências reais e problemas encontrados ao comprar propriedades em Higueron, Málaga com construtores e incorporadores.",
+                callToAction: "Construtor e Incorporador: Ajam agora, abordem todas as preocupações, como elementos comuns ou privados, e impeçam que este site se expanda ainda mais com testemunhos reais de compradores"
+            },
+            it: {
+                title: "Evitare Higueron",
+                description: "Benvenuti su Evitare Higueron — una piattaforma dedicata alla condivisione e documentazione di esperienze reali e problemi riscontrati nell'acquisto di proprietà a Higueron, Malaga con costruttori e sviluppatori.",
+                callToAction: "Costruttore e Sviluppatore: Agite ora, affrontate ogni preoccupazione, come elementi comuni o privati, e impedite a questo sito web di espandersi ulteriormente con testimonianze reali degli acquirenti"
+            },
+            fi: {
+                title: "Vältä Higueron",
+                description: "Tervetuloa Vältä Higueron -sivustolle — alusta, joka on omistettu todellisten kokemusten ja Higueronin, Malagan kiinteistöjen ostamisessa havaittujen ongelmien jakamiseen ja dokumentointiin rakentajien ja kehittäjien kanssa.",
+                callToAction: "Rakentaja ja Kehittäjä: Toimikaa nyt, käsitelkää jokainen huolenaihe, kuten yhteiset tai yksityiset elementit, ja estäkää tämän verkkosivuston laajentuminen todellisilla ostajien lausunnoilla"
+            },
+            da: {
+                title: "Undgå Higueron",
+                description: "Velkommen til Undgå Higueron — en platform dedikeret til at dele og dokumentere virkelige oplevelser og problemer, der opstår ved køb af ejendom i Higueron, Malaga med bygmestre og udviklere.",
+                callToAction: "Bygmester og Udvikler: Handle nu, adresser alle bekymringer, såsom fælles eller private elementer, og forhindre denne hjemmeside i at udvide sig yderligere med rigtige udtalelser fra købere"
+            },
+            sv: {
+                title: "Undvik Higueron",
+                description: "Välkommen till Undvik Higueron — en plattform dedikerad till att dela och dokumentera verkliga erfarenheter och problem som uppstått vid köp av fastigheter i Higueron, Malaga med byggmästare och utvecklare.",
+                callToAction: "Byggmästare och Utvecklare: Agera nu, ta itu med alla bekymmer, såsom gemensamma eller privata element, och förhindra att denna webbplats expanderar ytterligare med verkliga vittnesmål från köpare"
+            },
+            no: {
+                title: "Unngå Higueron",
+                description: "Velkommen til Unngå Higueron — en plattform dedikert til å dele og dokumentere virkelige erfaringer og problemer som oppstår ved kjøp av eiendom i Higueron, Malaga med byggmestre og utviklere.",
+                callToAction: "Byggmester og Utvikler: Handle nå, adresser alle bekymringer, som felles eller private elementer, og forhindre at dette nettstedet utvider seg ytterligere med ekte vitnesbyrd fra kjøpere"
+            },
+            fa: {
+                title: "اجتناب از هیگوئرون",
+                description: "به اجتناب از هیگوئرون خوش آمدید — پلتفرمی اختصاص داده شده به اشتراک‌گذاری و مستندسازی تجربیات واقعی و مشکلات برخورد شده هنگام خرید ملک در هیگوئرون، مالاگا با سازندگان و توسعه‌دهندگان.",
+                callToAction: "سازنده و توسعه‌دهنده: اکنون اقدام کنید، به هر نگرانی از جمله عناصر مشترک یا خصوصی رسیدگی کنید و با شهادت‌های واقعی خریداران از گسترش بیشتر این وب‌سایت جلوگیری کنید"
+            }
+        };
+
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.split('-')[0];
+            return translations[langCode] ? langCode : 'en';
+        }
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            document.documentElement.lang = lang;
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        const languageSelector = document.getElementById('languageSelector');
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        const initialLanguage = savedLanguage || detectBrowserLanguage();
+        
+        languageSelector.value = initialLanguage;
+        setLanguage(initialLanguage);
+
+        languageSelector.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+    </script>
 </body>
 </html>
