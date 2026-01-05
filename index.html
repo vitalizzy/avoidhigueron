@@ -37,8 +37,95 @@
             }
         }
         
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        @keyframes floatReverse {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+        }
+        
         body {
             animation: fadeInUp 0.6s ease-out;
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #1e293b, #0f172a, #312e81);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite, fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.05;
+            filter: blur(40px);
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            border-radius: 50%;
+            top: 60%;
+            right: 10%;
+            animation: floatReverse 25s ease-in-out infinite;
+        }
+        
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 50%;
+            bottom: 10%;
+            left: 50%;
+            animation: float 18s ease-in-out infinite;
+            animation-delay: -5s;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
         }
         
         .react-card {
@@ -118,8 +205,13 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 min-h-screen flex items-center justify-center px-4 py-8">
-    <div class="max-w-4xl w-full">
+<body class="min-h-screen flex items-center justify-center px-4 py-8">
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="max-w-4xl w-full content-wrapper">
         <!-- Language Selector -->
         <div class="flex justify-end mb-4">
             <select id="languageSelector" class="bg-white/10 backdrop-blur-lg text-white border border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer">
@@ -151,7 +243,7 @@
                 </p>
                 <div class="mt-10">
                     <p class="text-lg md:text-xl text-red-200 font-semibold rounded-xl px-6 py-4 inline-block cta-card" data-i18n="callToAction">
-                        Constructor and Developer: Act now, address every concern, and prevent this website from expanding further
+                        Constructors and Developers in the Higuerón area: Act now, address every concern, defects, such a common or private elements, and prevent this website from expanding further with real testimosnials from buyers
                     </p>
                 </div>
             </div>
@@ -163,72 +255,72 @@
             en: {
                 title: "Avoid Higueron",
                 description: "Welcome to Avoid Higueron — a platform created in response to recurring issues related to poor construction quality and deficient project management by developers and constructors in the Higuerón area, Málaga. The purpose of this website is twofold: on the one hand, to make developers accountable for repairing defects and fulfilling what was originally promised; on the other, to inform potential buyers by giving visibility to the real experiences of people who have already purchased property in this area. Avoid Higueron collects first-hand testimonies and visual documentation of real situations, covering both common areas and private residences, in order to promote transparency and protect future buyers.",
-                callToAction: "Constructor and Developer: Act now, address every concern, such a common or private elements, and prevent this website from expanding further with real testimosnials from buyers"
+                callToAction: "Constructors and Developers in the Higuerón area: Act now, address every concern, defects, such a common or private elements, and prevent this website from expanding further with real testimosnials from buyers"
             },
             es: {
                 title: "Evite Higueron",
                 description: "Bienvenido a Evitar Higueron — una plataforma creada en respuesta a problemas recurrentes relacionados con la mala calidad de construcción y la gestión deficiente de proyectos por parte de promotores y constructores en la zona de Higuerón, Málaga. El propósito de este sitio web es doble: por un lado, hacer que los promotores sean responsables de reparar los defectos y cumplir con lo que se prometió originalmente; por otro, informar a los compradores potenciales dando visibilidad a las experiencias reales de personas que ya han comprado propiedades en esta área. Evitar Higueron recopila testimonios de primera mano y documentación visual de situaciones reales, cubriendo tanto áreas comunes como residencias privadas, con el fin de promover la transparencia y proteger a futuros compradores.",
-                callToAction: "Constructor y Promotor: Actúen ahora, aborden cada preocupación, como elementos comunes o privados, y eviten que este sitio web se expanda aún más con testimonios reales de compradores"
+                callToAction: "Constructores y Promotores en la zona de Higuerón: Actúen ahora, aborden cada preocupación, defectos, como elementos comunes o privados, y eviten que este sitio web se expanda aún más con testimonios reales de compradores"
             },
             fr: {
                 title: "Éviter Higueron",
                 description: "Bienvenue sur Éviter Higueron — une plateforme créée en réponse à des problèmes récurrents liés à une mauvaise qualité de construction et à une gestion de projet déficiente par les promoteurs et constructeurs dans la zone de Higuerón, Málaga. L'objectif de ce site web est double : d'une part, tenir les promoteurs responsables de la réparation des défauts et de la réalisation de ce qui avait été promis à l'origine ; d'autre part, informer les acheteurs potentiels en donnant de la visibilité aux expériences réelles des personnes qui ont déjà acheté une propriété dans cette zone. Éviter Higueron collecte des témoignages de première main et de la documentation visuelle de situations réelles, couvrant à la fois les espaces communs et les résidences privées, afin de promouvoir la transparence et de protéger les futurs acheteurs.",
-                callToAction: "Constructeur et Promoteur : Agissez maintenant, répondez à chaque préoccupation, tels que les éléments communs ou privés, et empêchez ce site web de se développer davantage avec de vrais témoignages d'acheteurs"
+                callToAction: "Constructeurs et Promoteurs dans la zone de Higuerón : Agissez maintenant, répondez à chaque préoccupation, défauts, tels que les éléments communs ou privés, et empêchez ce site web de se développer davantage avec de vrais témoignages d'acheteurs"
             },
             de: {
                 title: "Higueron Vermeiden",
                 description: "Willkommen bei Higueron Vermeiden — eine Plattform, die als Reaktion auf wiederkehrende Probleme im Zusammenhang mit schlechter Bauqualität und mangelhaftem Projektmanagement durch Entwickler und Bauunternehmer in der Higuerón-Gegend, Málaga, erstellt wurde. Der Zweck dieser Website ist zweifach: Einerseits sollen Entwickler für die Reparatur von Mängeln und die Erfüllung dessen, was ursprünglich versprochen wurde, zur Verantwortung gezogen werden; andererseits sollen potenzielle Käufer informiert werden, indem den realen Erfahrungen von Menschen, die bereits Immobilien in dieser Gegend gekauft haben, Sichtbarkeit verliehen wird. Higueron Vermeiden sammelt Erfahrungsberichte aus erster Hand und visuelle Dokumentation realer Situationen, die sowohl Gemeinschaftsbereiche als auch private Residenzen abdecken, um Transparenz zu fördern und zukünftige Käufer zu schützen.",
-                callToAction: "Bauunternehmer und Entwickler: Handeln Sie jetzt, gehen Sie auf jede Sorge ein, wie Gemeinschafts- oder Privatbereiche, und verhindern Sie, dass diese Website mit echten Käuferberichten weiter wächst"
+                callToAction: "Bauunternehmer und Entwickler im Higuerón-Gebiet: Handeln Sie jetzt, gehen Sie auf jede Sorge, Mängel, wie Gemeinschafts- oder Privatbereiche ein, und verhindern Sie, dass diese Website mit echten Käuferberichten weiter wächst"
             },
             pt: {
                 title: "Evitar Higueron",
                 description: "Bem-vindo ao Evitar Higueron — uma plataforma criada em resposta a problemas recorrentes relacionados à má qualidade de construção e gestão de projetos deficiente por parte de incorporadores e construtores na área de Higuerón, Málaga. O propósito deste site é duplo: por um lado, responsabilizar os incorporadores pela reparação de defeitos e pelo cumprimento do que foi originalmente prometido; por outro, informar potenciais compradores dando visibilidade às experiências reais de pessoas que já compraram propriedades nesta área. Evitar Higueron reúne testemunhos em primeira mão e documentação visual de situações reais, cobrindo tanto áreas comuns quanto residências privadas, a fim de promover a transparência e proteger futuros compradores.",
-                callToAction: "Construtor e Incorporador: Ajam agora, abordem todas as preocupações, como elementos comuns ou privados, e impeçam que este site se expanda ainda mais com testemunhos reais de compradores"
+                callToAction: "Construtores e Incorporadores na área de Higuerón: Ajam agora, abordem todas as preocupações, defeitos, como elementos comuns ou privados, e impeçam que este site se expanda ainda mais com testemunhos reais de compradores"
             },
             it: {
                 title: "Evitare Higueron",
                 description: "Benvenuti su Evitare Higueron — una piattaforma creata in risposta a problemi ricorrenti legati alla scarsa qualità costruttiva e alla gestione carente dei progetti da parte di sviluppatori e costruttori nell'area di Higuerón, Málaga. Lo scopo di questo sito web è duplice: da un lato, rendere gli sviluppatori responsabili della riparazione dei difetti e dell'adempimento di ciò che era stato originariamente promesso; dall'altro, informare i potenziali acquirenti dando visibilità alle esperienze reali delle persone che hanno già acquistato proprietà in questa zona. Evitare Higueron raccoglie testimonianze di prima mano e documentazione visiva di situazioni reali, coprendo sia aree comuni che residenze private, al fine di promuovere la trasparenza e proteggere i futuri acquirenti.",
-                callToAction: "Costruttore e Sviluppatore: Agite ora, affrontate ogni preoccupazione, come elementi comuni o privati, e impedite a questo sito web di espandersi ulteriormente con testimonianze reali degli acquirenti"
+                callToAction: "Costruttori e Sviluppatori nell'area di Higuerón: Agite ora, affrontate ogni preoccupazione, difetti, come elementi comuni o privati, e impedite a questo sito web di espandersi ulteriormente con testimonianze reali degli acquirenti"
             },
             fi: {
                 title: "Vältä Higueron",
                 description: "Tervetuloa Vältä Higueron -sivustolle — alusta, joka on luotu vastauksena toistuviin ongelmiin, jotka liittyvät huonoon rakennuslaatuun ja puutteelliseen projektinhallintaan kehittäjien ja rakentajien toimesta Higuerónin alueella, Málagassa. Tämän verkkosivuston tarkoitus on kaksitahoinen: toisaalta saada kehittäjät vastuuseen vikojen korjaamisesta ja alun perin luvattujen asioiden täyttämisestä; toisaalta tiedottaa potentiaalisia ostajia antamalla näkyvyyttä ihmisten todellisille kokemuksille, jotka ovat jo ostaneet kiinteistöjä tältä alueelta. Vältä Higueron kerää ensi käden todistuksia ja visuaalista dokumentaatiota todellisista tilanteista, jotka kattavat sekä yhteiset alueet että yksityiset asunnot, läpinäkyvyyden edistämiseksi ja tulevien ostajien suojelemiseksi.",
-                callToAction: "Rakentaja ja Kehittäjä: Toimikaa nyt, käsitelkää jokainen huolenaihe, kuten yhteiset tai yksityiset elementit, ja estäkää tämän verkkosivuston laajentuminen todellisilla ostajien lausunnoilla"
+                callToAction: "Rakentajat ja Kehittäjät Higuerónin alueella: Toimikaa nyt, käsitelkää jokainen huolenaihe, viat, kuten yhteiset tai yksityiset elementit, ja estäkää tämän verkkosivuston laajentuminen todellisilla ostajien lausunnoilla"
             },
             da: {
                 title: "Undgå Higueron",
                 description: "Velkommen til Undgå Higueron — en platform skabt som reaktion på tilbagevendende problemer relateret til dårlig bygningskvalitet og mangelfuld projektstyring fra udviklere og bygmestre i Higuerón-området, Málaga. Formålet med denne hjemmeside er tosidet: på den ene side at holde udviklere ansvarlige for at reparere defekter og opfylde det, der oprindeligt blev lovet; på den anden side at informere potentielle købere ved at give synlighed til de virkelige oplevelser fra mennesker, der allerede har købt ejendom i dette område. Undgå Higueron indsamler førstehånds vidnesbyrd og visuel dokumentation af virkelige situationer, der dækker både fællesarealer og private boliger, for at fremme gennemsigtighed og beskytte fremtidige købere.",
-                callToAction: "Bygmester og Udvikler: Handle nu, adresser alle bekymringer, såsom fælles eller private elementer, og forhindre denne hjemmeside i at udvide sig yderligere med rigtige udtalelser fra købere"
+                callToAction: "Bygmestre og Udviklere i Higuerón-området: Handle nu, adresser alle bekymringer, defekter, såsom fælles eller private elementer, og forhindre denne hjemmeside i at udvide sig yderligere med rigtige udtalelser fra købere"
             },
             sv: {
                 title: "Undvik Higueron",
                 description: "Välkommen till Undvik Higueron — en plattform skapad som svar på återkommande problem relaterade till dålig byggkvalitet och bristfällig projektledning från utvecklare och byggmästare i Higuerón-området, Málaga. Syftet med denna webbplats är tvåfaldigt: å ena sidan att hålla utvecklare ansvariga för att reparera defekter och uppfylla vad som ursprungligen utlovades; å andra sidan att informera potentiella köpare genom att ge synlighet åt de verkliga upplevelserna från människor som redan har köpt fastigheter i detta område. Undvik Higueron samlar förstahandsberättelser och visuell dokumentation av verkliga situationer, som täcker både gemensamma områden och privata bostäder, för att främja transparens och skydda framtida köpare.",
-                callToAction: "Byggmästare och Utvecklare: Agera nu, ta itu med alla bekymmer, såsom gemensamma eller privata element, och förhindra att denna webbplats expanderar ytterligare med verkliga vittnesmål från köpare"
+                callToAction: "Byggmästare och Utvecklare i Higuerón-området: Agera nu, ta itu med alla bekymmer, defekter, såsom gemensamma eller privata element, och förhindra att denna webbplats expanderar ytterligare med verkliga vittnesmål från köpare"
             },
             no: {
                 title: "Unngå Higueron",
                 description: "Velkommen til Unngå Higueron — en plattform opprettet som respons på gjentakende problemer knyttet til dårlig byggkvalitet og mangelfull prosjektledelse fra utviklere og byggmestre i Higuerón-området, Málaga. Formålet med dette nettstedet er todelt: på den ene siden å holde utviklere ansvarlige for å reparere defekter og oppfylle det som opprinnelig ble lovet; på den andre siden å informere potensielle kjøpere ved å gi synlighet til de virkelige erfaringene til mennesker som allerede har kjøpt eiendom i dette området. Unngå Higueron samler førstehånds vitnesbyrd og visuell dokumentasjon av virkelige situasjoner, som dekker både fellesarealer og private boliger, for å fremme åpenhet og beskytte fremtidige kjøpere.",
-                callToAction: "Byggmester og Utvikler: Handle nå, adresser alle bekymringer, som felles eller private elementer, og forhindre at dette nettstedet utvider seg ytterligere med ekte vitnesbyrd fra kjøpere"
+                callToAction: "Byggmestere og Utviklere i Higuerón-området: Handle nå, adresser alle bekymringer, defekter, som felles eller private elementer, og forhindre at dette nettstedet utvider seg ytterligere med ekte vitnesbyrd fra kjøpere"
             },
             ru: {
                 title: "Избегайте Хигерон",
                 description: "Добро пожаловать на платформу Избегайте Хигерон — платформу, созданную в ответ на повторяющиеся проблемы, связанные с низким качеством строительства и недостаточным управлением проектами застройщиками и строителями в районе Игерон, Малага. Цель этого веб-сайта двояка: с одной стороны, привлечь застройщиков к ответственности за устранение дефектов и выполнение того, что было изначально обещано; с другой стороны, информировать потенциальных покупателей, предоставляя видимость реальному опыту людей, которые уже приобрели недвижимость в этом районе. Избегайте Хигерон собирает свидетельства из первых рук и визуальную документацию реальных ситуаций, охватывающих как общие зоны, так и частные резиденции, с целью содействия прозрачности и защиты будущих покупателей.",
-                callToAction: "Строитель и Застройщик: Действуйте сейчас, решите все проблемы, такие как общие или частные элементы, и предотвратите дальнейшее расширение этого сайта реальными отзывами покупателей"
+                callToAction: "Строители и Застройщики в районе Хигерон: Действуйте сейчас, решите все проблемы, дефекты, такие как общие или частные элементы, и предотвратите дальнейшее расширение этого сайта реальными отзывами покупателей"
             },
             hu: {
                 title: "Kerülje a Higueront",
                 description: "Üdvözöljük a Kerülje a Higueront platformon — egy olyan platformon, amely a Higuerón területen, Málagában a fejlesztők és építők által végzett rossz építési minőséggel és hiányos projektmenedzsmenttel kapcsolatos ismétlődő problémákra adott válaszként jött létre. Ennek a weboldalnak a célja kettős: egyrészt felelősségre vonni a fejlesztőket a hibák kijavításáért és az eredetileg ígértek teljesítéséért; másrészt tájékoztatni a potenciális vásárlókat azáltal, hogy láthatóvá teszi azon emberek valós tapasztalatait, akik már vásároltak ingatlant ezen a területen. A Kerülje a Higueront első kézből származó tanúvallomásokat és vizuális dokumentációt gyűjt valós helyzetekről, amely mind a közös területeket, mind a magánlakásokat lefedi, az átláthatóság elősegítése és a jövőbeli vásárlók védelme érdekében.",
-                callToAction: "Építő és Fejlesztő: Cselekedjen most, foglalkozzon minden aggállyal, például közös vagy privát elemekkel, és akadályozza meg, hogy ez a weboldal tovább bővüljön valós vásárlói véleményekkel"
+                callToAction: "Építők és Fejlesztők a Higuerón területén: Cselekedjen most, foglalkozzon minden aggállyal, hibával, például közös vagy privát elemekkel, és akadályozza meg, hogy ez a weboldal tovább bővüljön valós vásárlói véleményekkel"
             },
             ro: {
                 title: "Evitați Higueron",
                 description: "Bun venit la Evitați Higueron — o platformă creată ca răspuns la problemele recurente legate de calitatea proastă a construcției și managementul deficitar al proiectelor de către dezvoltatori și constructori în zona Higuerón, Málaga. Scopul acestui site web este dublu: pe de o parte, să trăgere la răspundere dezvoltatorii pentru repararea defectelor și îndeplinirea a ceea ce a fost promis inițial; pe de altă parte, să informeze potențialii cumpărători oferind vizibilitate experiențelor reale ale persoanelor care au achiziționat deja proprietăți în această zonă. Evitați Higueron colectează mărturii directe și documentație vizuală despre situații reale, acoperind atât zonele comune, cât și reședințele private, pentru a promova transparența și a proteja viitorii cumpărători.",
-                callToAction: "Constructor și Dezvoltator: Acționați acum, abordați fiecare problemă, cum ar fi elementele comune sau private, și preveniți extinderea acestui site web cu mărturii reale de la cumpărători"
+                callToAction: "Constructori și Dezvoltatori în zona Higuerón: Acționați acum, abordați fiecare problemă, defecte, cum ar fi elementele comune sau private, și preveniți extinderea acestui site web cu mărturii reale de la cumpărători"
             },
             fa: {
                 title: "اجتناب از هیگوئرون",
                 description: "به اجتناب از هیگوئرون خوش آمدید — پلتفرمی که در پاسخ به مشکلات تکراری مرتبط با کیفیت ساخت‌وساز ضعیف و مدیریت پروژه ناقص توسط توسعه‌دهندگان و سازندگان در منطقه هیگوئرون، مالاگا ایجاد شده است. هدف این وب‌سایت دوگانه است: از یک طرف، مسئول نگه داشتن توسعه‌دهندگان برای تعمیر نقص‌ها و انجام آنچه در ابتدا وعده داده شده بود؛ از طرف دیگر، اطلاع‌رسانی به خریداران بالقوه با ارائه دید به تجربیات واقعی افرادی که قبلاً در این منطقه ملک خریداری کرده‌اند. اجتناب از هیگوئرون شهادت‌های دست اول و مستندات بصری از موقعیت‌های واقعی را جمع‌آوری می‌کند که هم مناطق مشترک و هم اقامتگاه‌های خصوصی را پوشش می‌دهد، به منظور ترویج شفافیت و حفاظت از خریداران آینده.",
-                callToAction: "سازنده و توسعه‌دهنده: اکنون اقدام کنید، به هر نگرانی از جمله عناصر مشترک یا خصوصی رسیدگی کنید و با شهادت‌های واقعی خریداران از گسترش بیشتر این وب‌سایت جلوگیری کنید"
+                callToAction: "سازندگان و توسعه‌دهندگان در منطقه هیگوئرون: اکنون اقدام کنید، به هر نگرانی، نقص، از جمله عناصر مشترک یا خصوصی رسیدگی کنید و با شهادت‌های واقعی خریداران از گسترش بیشتر این وب‌سایت جلوگیری کنید"
             }
         };
 
